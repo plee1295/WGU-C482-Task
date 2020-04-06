@@ -104,6 +104,8 @@ public abstract class Part {
 
     //Part Validation Method
     public static String isPartValid(String name, int min, int max, int inv, double price, String errorMessage) {
+        errorMessage = "";
+        
         if (name == null) {
             errorMessage = errorMessage + ("Name field is blank.");
         }

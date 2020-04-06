@@ -81,7 +81,7 @@ public class ModifyPartController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             System.out.println("Part add has been cancelled.");
-            Parent partsCancel = FXMLLoader.load(getClass().getResource("MainScreen.fxml"));
+            Parent partsCancel = FXMLLoader.load(getClass().getResource("Main.fxml"));
             Scene scene = new Scene(partsCancel);
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(scene);
