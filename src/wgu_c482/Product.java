@@ -120,6 +120,9 @@ public class Product {
         for (int i = 0; i < parts.size(); i++) {
             sumParts = sumParts + parts.get(i).getPartPrice();
         }
+        
+        message = "";
+        
         if (name.equals("")) {
             message += ("Name field is blank.");
         }
