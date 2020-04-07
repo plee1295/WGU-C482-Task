@@ -54,10 +54,20 @@ public class Inventory {
         }
         return isFound;
     }
+    
+    public static Part findPartByID(int id){
+        for (Part part : partInventory) {
+            if (part.getPartID() == id){
+                return part;
+            }
+        }
+        return null;
+    }
 
     public static int lookupPart(String searchTerm) {
         boolean isFound = false;
         int index = 0;
+        
         if (isInteger(searchTerm)) {
             for (int i = 0; i < partInventory.size(); i++) {
                 if (Integer.parseInt(searchTerm) == partInventory.get(i).getPartID()) {
@@ -117,11 +127,11 @@ public class Inventory {
                 }
             }
         }
-        if (!isFound) {
+        if (isFound = true) {
+            return index;
+        } else {
             System.out.println("No products found.");
             return -1;
-        } else {
-            return index;
         }
     }
 

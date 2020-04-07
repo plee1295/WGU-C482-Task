@@ -22,7 +22,7 @@ import javafx.collections.ObservableList;
 public class Product {
 
     //Instance variables
-    private static ObservableList<Part> parts = FXCollections.observableArrayList();
+    private ObservableList<Part> parts = FXCollections.observableArrayList();
     private final IntegerProperty productID;
     private final StringProperty name;
     private final DoubleProperty price;
@@ -113,6 +113,10 @@ public class Product {
     public void setProductParts(ObservableList<Part> parts) {
         this.parts = parts;
     }
+    
+//    public void addPart(int id){
+//        parts.add(Inventory.findPartByID(id));
+//    }
 
     //Product Validation Method
     public static String validateProduct(String name, int min, int max, int inv, double price, ObservableList<Part> parts, String message) {

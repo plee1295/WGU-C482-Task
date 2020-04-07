@@ -33,10 +33,11 @@ import static wgu_c482.Inventory.getPartInventory;
  * @author parkerlee
  */
 public class AddProductController implements Initializable {
-
-    private ObservableList<Part> currentParts = FXCollections.observableArrayList();
+    
+    private final ObservableList<Part> currentParts = FXCollections.observableArrayList();
     private String exceptionMessage = new String();
     private int productID;
+    private Product productToAdd;
 
     @FXML
     private TextField AddProductsIDField;
@@ -111,10 +112,35 @@ public class AddProductController implements Initializable {
 
 
     @FXML
-    void handleAddProductsAddPartButton(ActionEvent event) {
+    void handleAddProductsAddPartButton(ActionEvent event) throws IOException {
+        Boolean found = false;
         Part part = AddProductsAddTableView.getSelectionModel().getSelectedItem();
-        currentParts.add(part);
-        updateCurrentPartTableView();
+        
+        //make sure a part was selected
+        if(part != null) {
+            for (int i = 0; i < currentParts.size(); i++) {
+                if(currentParts.get(i).equals(part)) {
+                    found = true;
+                }
+            } 
+
+            if(found) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Part Duplication");
+                alert.setHeaderText("Part already in Product");
+                alert.setContentText("This part is already linked to the product");
+                alert.showAndWait();
+            } else {
+                currentParts.add(part);
+                AddProductsDeleteTableView.setItems(currentParts);    
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initModality(Modality.APPLICATION_MODAL);
+            alert.setTitle("No Part selected");
+            alert.setHeaderText("Please select a part from the existing list to add to the product"); 
+            alert.showAndWait();
+        }
     }
 
     @FXML
@@ -140,7 +166,7 @@ public class AddProductController implements Initializable {
     }
 
     
-
+    
     @FXML
     void handleAddProductsDeletePartButton(ActionEvent event) {
 
